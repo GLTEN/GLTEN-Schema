@@ -1,0 +1,12 @@
+{   
+    "identifier": "DOI",
+    "localIdentifier": "Experiment Code",
+    "name": "Title",
+    "url": "URL",
+    "description": "Description",
+    "disambiguatingDescription": "Objectives",
+    "relatedExperiment": "Related Experiment(s)",
+    "conditionsOfAccess": "Data Access Statement",
+    "isAccessibleForFree": "is Accessible for Free"
+    
+}
