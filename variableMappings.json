@@ -1,12 +1,25 @@
-{   
-    "identifier": "DOI",
-    "localIdentifier": "Experiment Code",
-    "name": "Title",
-    "url": "URL",
-    "description": "Description",
-    "disambiguatingDescription": "Objectives",
-    "relatedExperiment": "Related Experiment(s)",
-    "conditionsOfAccess": "Data Access Statement",
-    "isAccessibleForFree": "is Accessible for Free"
-    
+{
+	"identifier": "DOI",
+	"localIdentifier": "Experiment Code",
+	"name": "Title",
+	"url": "URL",
+	"description": "Description",
+	"disambiguatingDescription": "Objectives",
+	"relatedExperiment": "Related Experiment(s)",
+	"conditionsOfAccess": "Data Access Statement",
+	"isAccessibleForFree": "is Accessible for Free",
+	"temporalCoverage": "Temporal Coverage",
+	"dateStart": "Date Start",
+	"dateEPEnd": "Establisment Period End",
+	"dateEnd": "Date End",
+	"funder": "Funding",
+	"jobTitle": "Role",
+	"givenName": "First Name",
+	"familyName": "Last Name"",
+	"sameAs": "Name Identifier",
+	"streetAddress": "Address",
+	"addressLocality": "Town",
+	"addressRegion": "County",
+	"postalCode": "Post Code",
+	"addressCountry": "Country"
 }
