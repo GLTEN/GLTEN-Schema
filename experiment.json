@@ -44,7 +44,9 @@
 			"name": "Biotechnology and Biological Sciences Research Council",
 			"sameAs": "http://dx.doi.org/10.13039/501100000268",
 			"award": "BBS/E/C/000J0300 - The Rothamsted Long - Term Experiments - National Capability",
-			"identifier": "https://gtr.ukri.org/projects?ref=BBS%2FE%2FC%2F000J0300"
+			"identifier": "https://gtr.ukri.org/projects?ref=BBS%2FE%2FC%2F000J0300",
+			"startDate": "2000",
+			"endDate": "2010"
 		}
 	]
 }
