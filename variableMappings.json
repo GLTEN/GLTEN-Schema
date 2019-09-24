@@ -21,5 +21,21 @@
 	"addressLocality": "Town",
 	"addressRegion": "County",
 	"postalCode": "Post Code",
-	"addressCountry": "Country"
+	"addressCountry": "Country",
+	"studyDesign": "Study Design or Design Type",
+	"area": "Experiment area",
+	"areaUnit": "Experiment area units",
+	"numberOfPlots": "Number of blocks",
+	"numberOfReplicates": "Number of replicates",
+	"numberOfSubplots": "Number of sub plots",
+	"plotWidth": "Plot width",
+	"plotWidthUnit": "Plot width Unit",
+	"plotLength": "Plot length",
+	"plotLengthUnit": "Plot length Unit",
+	"plotArea": "Plot area",
+	"plotAreaUnit": "Plot area Unit",
+	"plotSpacing": "Plot spacing",
+	"plotSpacingUnit": "Plot spacing Unit",
+	"plotOrientation": "Plot orientation",
+	"numberHarvest": "Number of harvests per year"
 }

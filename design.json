@@ -1,0 +1,192 @@
+[
+	{
+		"administrative": {
+			"type": "experiment",
+			"identifier": "10.23637/Sax-rrn1-1 - that would be the DOI - Unique Identifier for the Design",
+			"localIdentifier": "rrn1 - Use the code for the experiment - Local Identifier",
+			"name": "name of the design",
+			"url": "http://www.era.rothamsted.ac.uk/rrn1/",
+			"description": "Description for the design"
+		},
+		"design": {
+			"dateStart": "MM-DD-YYYY",
+			"dateEnd": "MM-DD-YYYY",
+			"description": "Specific comments about the experiment design",
+			"studyDesign": "Demonstration Strip Design",
+			"factorNumber": "number of factor level combinations",
+			"area": "Experiment area",
+			"areaUnit": "Experiment area units",
+			"numberOfPlots": "Number of blocks",
+			"numberOfReplicates": "Number of replicates",
+			"numberOfSubplots": "Number of sub plots",
+			"plotWidth": "Plot width",
+			"plotWidthUnit": "Plot width Unit",
+			"plotLength": "Plot length",
+			"plotLengthUnit": "Plot length Unit",
+			"plotArea": "Plot area",
+			"plotAreaUnit": "Plot area Unit",
+			"plotSpacing": "Plot spacing",
+			"plotSpacingUnit": "Plot spacing Unit",
+			"plotOrientation": "Plot orientation",
+			"numberHarvest": "Number of harvests per year"
+		},
+		"crop": [
+			{
+				"name": "Wheat",
+				"identifier": "c_8412",
+				"sameAs": "http://aims.fao.org/aos/agrovoc/c_8412",
+				"dateStart": "MM-DD-YYYY",
+				"dateEnd": "MM-DD-YYYY"
+			},
+			{
+				"name": "Oats",
+				"identifier": "c_5287",
+				"sameAs": "http://aims.fao.org/aos/agrovoc/c_5287",
+				"dateStart": "MM-DD-YYYY",
+				"dateEnd": "MM-DD-YYYY"
+			},
+			{
+				"name": "Malting Barley",
+				"identifier": "c_25485",
+				"sameAs": "http://aims.fao.org/aos/agrovoc/c_25485",
+				"dateStart": "MM-DD-YYYY",
+				"dateEnd": "MM-DD-YYYY"
+			}
+		]
+	},
+	{
+		"administrative": {
+			"type": "experiment",
+			"identifier": "10.23637/Sax-rrn1-1 - that would be the DOI - Unique Identifier for the Design",
+			"localIdentifier": "rrn1 - Use the code for the experiment - Local Identifier",
+			"name": "name of the design",
+			"url": "http://www.era.rothamsted.ac.uk/rrn1/",
+			"description": "Description for the design"
+		},
+		"design": {
+			"dateStart": "MM-DD-YYYY",
+			"dateEnd": "MM-DD-YYYY",
+			"description": "Specific comments about the experiment design",
+			"studyDesign": "Demonstration Strip Design",
+			"factorNumber": "number of factor level combinations",
+			"area": "Experiment area",
+			"areaUnit": "Experiment area units",
+			"numberOfPlots": "Number of blocks",
+			"numberOfReplicates": "Number of replicates",
+			"numberOfSubplots": "Number of sub plots",
+			"plotWidth": "Plot width",
+			"plotWidthUnit": "Plot width Unit",
+			"plotLength": "Plot length",
+			"plotLengthUnit": "Plot length Unit",
+			"plotArea": "Plot area",
+			"plotAreaUnit": "Plot area Unit",
+			"plotSpacing": "Plot spacing",
+			"plotSpacingUnit": "Plot spacing Unit",
+			"plotOrientation": "Plot orientation",
+			"numberHarvest": "Number of harvests per year"
+		},
+		"crop": [
+			{
+				"name": "Wheat",
+				"identifier": "c_8412",
+				"sameAs": "http://aims.fao.org/aos/agrovoc/c_8412",
+				"dateStart": "MM-DD-YYYY",
+				"dateEnd": "MM-DD-YYYY"
+			},
+			{
+				"name": "Oats",
+				"identifier": "c_5287",
+				"sameAs": "http://aims.fao.org/aos/agrovoc/c_5287",
+				"dateStart": "MM-DD-YYYY",
+				"dateEnd": "MM-DD-YYYY"
+			},
+			{
+				"name": "Malting Barley",
+				"identifier": "c_25485",
+				"sameAs": "http://aims.fao.org/aos/agrovoc/c_25485",
+				"dateStart": "MM-DD-YYYY",
+				"dateEnd": "MM-DD-YYYY"
+			}
+		]
+	},
+	{
+		"administrative": {
+			"type": "experiment",
+			"identifier": "10.23637/Sax-rrn1-1 - that would be the DOI - Unique Identifier for the Design",
+			"localIdentifier": "rrn1 - Use the code for the experiment - Local Identifier",
+			"name": "name of the design",
+			"url": "http://www.era.rothamsted.ac.uk/rrn1/",
+			"description": "Additional descriptive information not provided in the Experiment description. This section is most relevant where an experiment has two or more design periods."
+		},
+		"design": {
+			"dateStart": "MM-DD-YYYY",
+			"dateEnd": "MM-DD-YYYY",
+			"description": "Specific comments about the experiment design",
+			"studyDesign": "Demonstration Strip Design",
+			"factorNumber": "number of factor level combinations",
+			"area": "Experiment area",
+			"areaUnit": "Experiment area units",
+			"numberOfPlots": "Number of blocks",
+			"numberOfReplicates": "Number of replicates",
+			"numberOfSubplots": "Number of sub plots",
+			"plotWidth": "Plot width",
+			"plotWidthUnit": "Plot width Unit",
+			"plotLength": "Plot length",
+			"plotLengthUnit": "Plot length Unit",
+			"plotArea": "Plot area",
+			"plotAreaUnit": "Plot area Unit",
+			"plotSpacing": "Plot spacing",
+			"plotSpacingUnit": "Plot spacing Unit",
+			"plotOrientation": "Plot orientation",
+			"numberHarvest": "Number of harvests per year"
+		},
+		"crop": [
+			{
+				"name": "Wheat",
+				"identifier": "c_8412",
+				"sameAs": "http://aims.fao.org/aos/agrovoc/c_8412",
+				"dateStart": "MM-DD-YYYY",
+				"dateEnd": "MM-DD-YYYY"
+			},
+			{
+				"name": "Oats",
+				"identifier": "c_5287",
+				"sameAs": "http://aims.fao.org/aos/agrovoc/c_5287",
+				"dateStart": "MM-DD-YYYY",
+				"dateEnd": "MM-DD-YYYY"
+			},
+			{
+				"name": "Malting Barley",
+				"identifier": "c_25485",
+				"sameAs": "http://aims.fao.org/aos/agrovoc/c_25485",
+				"dateStart": "MM-DD-YYYY",
+				"dateEnd": "MM-DD-YYYY"
+			}
+		],
+		"WorkedFile" : "-------------------till here -------------------------------------------",
+		"cropRotations": {
+			
+		},
+		"factors": [
+			{
+				"name": "Wheat",
+				"description": "c_8412",
+				"effect": "http://aims.fao.org/aos/agrovoc/c_8412",
+				"plotApplication": "MM-DD-YYYY"
+			},
+			{
+				"name": "Wheat",
+				"description": "c_8412",
+				"effect": "http://aims.fao.org/aos/agrovoc/c_8412",
+				"plotApplication": "MM-DD-YYYY"
+			},
+			{
+				"name": "Wheat",
+				"description": "c_8412",
+				"effect": "http://aims.fao.org/aos/agrovoc/c_8412",
+				"plotApplication": "MM-DD-YYYY"
+			}
+		]
+	}
+]
+		

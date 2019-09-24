@@ -1,25 +1,27 @@
 {
-	"type": "Experiment",
-	"identifier": "10.23637/Sax-rrn1-1 - that would be the DOI - Unique Identifier",
-	"localIdentifier": "rrn1 - Use the code for the experiment - Local Identifier",
-	"name": "Saxmundham Rotation - Title",
-	"url": "http://www.era.rothamsted.ac.uk/rrn1/",
-	"description": "Description for the experiment",
-	"disambiguatingDescription": "Objectives of the experiment ",
-	"relatedExperiment": [
-		{
-			"type": "Experiment",
-			"identifier": "10.23637/Sax-rrn2-1 - that would be the DOI - Unique Identifier",
-			"localIdentifier": "rrn2 - Use the code for the experiment - Local Identifier",
-			"name": "Saxmundahm Rotation 2"
-		},
-		{
-			"type": "Experiment",
-			"identifier": "10.23637/Sax-rrn2-1 - that would be the DOI - Unique Identifier",
-			"localIdentifier": "rrn2 - Use the code for the experiment - Local Identifier",
-			"name": "Saxmundahm Rotation 2"
-		}
-	],
+	"administrative": {
+		"type": "Experiment",
+		"identifier": "10.23637/Sax-rrn1-1 - that would be the DOI - Unique Identifier",
+		"localIdentifier": "rrn1 - Use the code for the experiment - Local Identifier",
+		"name": "Saxmundham Rotation - Title",
+		"url": "http://www.era.rothamsted.ac.uk/rrn1/",
+		"description": "Description for the experiment",
+		"disambiguatingDescription": "Objectives of the experiment ",
+		"relatedExperiment": [
+			{
+				"type": "Experiment",
+				"identifier": "10.23637/Sax-rrn2-1 - that would be the DOI - Unique Identifier",
+				"localIdentifier": "rrn2 - Use the code for the experiment - Local Identifier",
+				"name": "Saxmundahm Rotation 2"
+			},
+			{
+				"type": "Experiment",
+				"identifier": "10.23637/Sax-rrn2-1 - that would be the DOI - Unique Identifier",
+				"localIdentifier": "rrn2 - Use the code for the experiment - Local Identifier",
+				"name": "Saxmundahm Rotation 2"
+			}
+		]
+	},
 	"dataAccess": {
 		"type": "creativeWork",
 		"conditionsOfAccess": "This work is licensed under the terms of the Creative Commons Attribution 4.0 International License - text describing data access statement",
@@ -36,8 +38,8 @@
 	},
 	"temporalCoverage": "1953/1970 from schema",
 	"dateStart": "MM-DD-YYYY",
-	"dateEPEnd":"MM-DD-YYYY",
-	"dateEnd":"MM-DD-YYYY",
+	"dateEPEnd": "MM-DD-YYYY",
+	"dateEnd": "MM-DD-YYYY",
 	"funder": [
 		{
 			"type": "organization",
