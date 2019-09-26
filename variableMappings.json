@@ -37,5 +37,9 @@
 	"plotSpacing": "Plot spacing",
 	"plotSpacingUnit": "Plot spacing Unit",
 	"plotOrientation": "Plot orientation",
-	"numberHarvest": "Number of harvests per year"
+	"numberHarvest": "Number of harvests per year",
+	"phasing": "Phasing",
+	"isTreatment": "Is treatment",
+	"rotationPhases": "Rotation Phases",
+	"phase": "Phase"
 }
