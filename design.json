@@ -163,10 +163,112 @@
 				"dateEnd": "MM-DD-YYYY"
 			}
 		],
-		"WorkedFile" : "-------------------till here -------------------------------------------",
-		"cropRotations": {
-			
-		},
+		
+		"cropRotations": [
+			{
+				"name": "Rotation Name ex: FPWWW",
+				"dateStart": "MM-DD-YYYY",
+				"dateEnd": "MM-DD-YYYY",
+				"phasing": "Phasing",
+				"isTreatment": "Is treatment",
+				"rotationPhases": [
+					{
+						"phase": "F",
+						"crop": "Fallow",
+						"description": "A year off"
+					},
+					{
+						"phase": "P",
+						"crop": "Pulses",
+						"description": "Alternate Beans, Lentils, Chick peas"
+					},
+					{
+						"phase": "W",
+						"crop": "Wheat",
+						"description": "A year off"
+					},
+					{
+						"phase": "W",
+						"crop": "Wheat",
+						"description": "A year off"
+					},
+					{
+						"phase": "W",
+						"crop": "Wheat",
+						"description": "A year off"
+					}
+				]
+			},
+			{
+				"name": "Rotation Name ex: FPWWW",
+				"dateStart": "MM-DD-YYYY",
+				"dateEnd": "MM-DD-YYYY",
+				"phasing": "Phasing",
+				"isTreatment": "Is treatment",
+				"rotationPhases": [
+					{
+						"phase": "F",
+						"crop": "Fallow",
+						"description": "A year off"
+					},
+					{
+						"phase": "P",
+						"crop": "Pulses",
+						"description": "Alternate Beans, Lentils, Chick peas"
+					},
+					{
+						"phase": "W",
+						"crop": "Wheat",
+						"description": "A year off"
+					},
+					{
+						"phase": "W",
+						"crop": "Wheat",
+						"description": "A year off"
+					},
+					{
+						"phase": "W",
+						"crop": "Wheat",
+						"description": "A year off"
+					}
+				]
+			},
+			{
+				"name": "Rotation Name ex: FPWWW",
+				"dateStart": "MM-DD-YYYY",
+				"dateEnd": "MM-DD-YYYY",
+				"phasing": "Phasing",
+				"isTreatment": "Is treatment",
+				"rotationPhases": [
+					{
+						"phase": "F",
+						"crop": "Fallow",
+						"description": "A year off"
+					},
+					{
+						"phase": "P",
+						"crop": "Pulses",
+						"description": "Alternate Beans, Lentils, Chick peas"
+					},
+					{
+						"phase": "W",
+						"crop": "Wheat",
+						"description": "A year off"
+					},
+					{
+						"phase": "W",
+						"crop": "Wheat",
+						"description": "A year off"
+					},
+					{
+						"phase": "W",
+						"crop": "Wheat",
+						"description": "A year off"
+					}
+				]
+			}
+		],
+		"WorkedFile": "-------------------till here -------------------------------------------",
 		"factors": [
 			{
 				"name": "Wheat",
