@@ -271,10 +271,19 @@
 		"WorkedFile": "-------------------till here -------------------------------------------",
 		"factors": [
 			{
-				"name": "Wheat",
+				"name": "Nitrogen Fertilization",
 				"description": "c_8412",
 				"effect": "http://aims.fao.org/aos/agrovoc/c_8412",
-				"plotApplication": "MM-DD-YYYY"
+				"plotApplication": "MM-DD-YYYY",
+				"levels" : {
+					"name": "N Rate 1",
+					"amount": "",
+					"unit": "kg/ha",
+					"category": "to describe an activity like till, no till, rotation?",
+					"appliedToCrop": "crop",
+					"dateStart": "MM-DD-YYYY",
+					"dateEnd": "MM-DD-YYYY"
+				}
 			},
 			{
 				"name": "Wheat",
