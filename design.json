@@ -452,6 +452,40 @@
 					}
 				]
 			}
+		],
+		"measurements": [
+			{
+				"variable": "name of variable",
+				"unit": "kg",
+				"collectionFrequency": "How often collected",
+				"scale": "plot? field? sample?",
+				"material": "soil? maize?",
+				"description": "some description"
+			},
+			{
+				"variable": "name of variable",
+				"unit": "kg",
+				"collectionFrequency": "How often collected",
+				"scale": "plot? field? sample?",
+				"material": "soil? maize?",
+				"description": "some description"
+			},
+			{
+				"variable": "name of variable",
+				"unit": "kg",
+				"collectionFrequency": "How often collected",
+				"scale": "plot? field? sample?",
+				"material": "soil? maize?",
+				"description": "some description"
+			},
+			{
+				"variable": "name of variable",
+				"unit": "kg",
+				"collectionFrequency": "How often collected",
+				"scale": "plot? field? sample?",
+				"material": "soil? maize?",
+				"description": "some description"
+			}
 		]
 	}
 ]
