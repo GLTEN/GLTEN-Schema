@@ -163,7 +163,6 @@
 				"dateEnd": "MM-DD-YYYY"
 			}
 		],
-		
 		"cropRotations": [
 			{
 				"name": "Rotation Name ex: FPWWW",
@@ -268,34 +267,190 @@
 				]
 			}
 		],
-		"WorkedFile": "-------------------till here -------------------------------------------",
-		"factors": [
+		"factor": [
 			{
 				"name": "Nitrogen Fertilization",
 				"description": "c_8412",
 				"effect": "http://aims.fao.org/aos/agrovoc/c_8412",
 				"plotApplication": "MM-DD-YYYY",
-				"levels" : {
-					"name": "N Rate 1",
-					"amount": "",
-					"unit": "kg/ha",
-					"category": "to describe an activity like till, no till, rotation?",
-					"appliedToCrop": "crop",
-					"dateStart": "MM-DD-YYYY",
-					"dateEnd": "MM-DD-YYYY"
-				}
+				"level": [
+					{
+						"name": "N Rate 1",
+						"amount": "96",
+						"unit": "kg/ha",
+						"category": "to describe an activity like till, no till, rotation?",
+						"appliedToCrop": "crop",
+						"dateStart": "MM-DD-YYYY",
+						"dateEnd": "MM-DD-YYYY",
+						"frequency": "text; ex annually in spring",
+						"method": "The method used",
+						"chemicalForm": "as Calcium Nitrate",
+						"notes": "additional comments"
+					},
+					{
+						"name": "N Rate 2",
+						"amount": "196",
+						"unit": "kg/ha",
+						"category": "to describe an activity like till, no till, rotation?",
+						"appliedToCrop": "crop",
+						"dateStart": "MM-DD-YYYY",
+						"dateEnd": "MM-DD-YYYY",
+						"frequency": "text; ex annually in spring",
+						"method": "The method used",
+						"chemicalForm": "as Calcium Nitrate",
+						"notes": "additional comments"
+					},
+					{
+						"name": "N Rate 3",
+						"amount": "50",
+						"unit": "kg/ha",
+						"category": "to describe an activity like till, no till, rotation?",
+						"appliedToCrop": "wheat",
+						"dateStart": "MM-DD-YYYY",
+						"dateEnd": "MM-DD-YYYY",
+						"frequency": "text; ex annually in spring",
+						"method": "The method used",
+						"chemicalForm": "as Calcium Nitrate",
+						"notes": "additional comments"
+					}
+				]
 			},
 			{
-				"name": "Wheat",
+				"name": "Phosphate Fertilization",
 				"description": "c_8412",
 				"effect": "http://aims.fao.org/aos/agrovoc/c_8412",
-				"plotApplication": "MM-DD-YYYY"
+				"plotApplication": "MM-DD-YYYY",
+				"level": [
+					{
+						"name": "P Rate 1",
+						"amount": "",
+						"unit": "kg/ha",
+						"category": "to describe an activity like till, no till, rotation?",
+						"appliedToCrop": "crop",
+						"dateStart": "MM-DD-YYYY",
+						"dateEnd": "MM-DD-YYYY",
+						"frequency": "text; ex annually in spring",
+						"method": "The method used",
+						"chemicalForm": "as Calcium Nitrate",
+						"notes": "additional comments"
+					},
+					{
+						"name": "P Rate 2",
+						"amount": "",
+						"unit": "kg/ha",
+						"category": "to describe an activity like till, no till, rotation?",
+						"appliedToCrop": "crop",
+						"dateStart": "MM-DD-YYYY",
+						"dateEnd": "MM-DD-YYYY",
+						"frequency": "text; ex annually in spring",
+						"method": "The method used",
+						"chemicalForm": "as Calcium Nitrate",
+						"notes": "additional comments"
+					},
+					{
+						"name": "P Rate 3",
+						"amount": "",
+						"unit": "kg/ha",
+						"category": "to describe an activity like till, no till, rotation?",
+						"appliedToCrop": "crop",
+						"dateStart": "MM-DD-YYYY",
+						"dateEnd": "MM-DD-YYYY",
+						"frequency": "text; ex annually in spring",
+						"method": "The method used",
+						"chemicalForm": "as Calcium Nitrate",
+						"notes": "additional comments"
+					}
+				]
 			},
 			{
-				"name": "Wheat",
+				"name": "Potassium Fertilization",
 				"description": "c_8412",
 				"effect": "http://aims.fao.org/aos/agrovoc/c_8412",
-				"plotApplication": "MM-DD-YYYY"
+				"plotApplication": "MM-DD-YYYY",
+				"level": [
+					{
+						"name": "K Rate 1",
+						"amount": "",
+						"unit": "kg/ha",
+						"category": "to describe an activity like till, no till, rotation?",
+						"appliedToCrop": "crop",
+						"dateStart": "MM-DD-YYYY",
+						"dateEnd": "MM-DD-YYYY",
+						"frequency": "text; ex annually in spring",
+						"method": "The method used",
+						"chemicalForm": "as Calcium Nitrate",
+						"notes": "additional comments"
+					},
+					{
+						"name": "K Rate 1",
+						"amount": "",
+						"unit": "kg/ha",
+						"category": "to describe an activity like till, no till, rotation?",
+						"appliedToCrop": "crop",
+						"dateStart": "MM-DD-YYYY",
+						"dateEnd": "MM-DD-YYYY",
+						"frequency": "text; ex annually in spring",
+						"method": "The method used",
+						"chemicalForm": "as Calcium Nitrate",
+						"notes": "additional comments"
+					},
+					{
+						"name": "K Rate 1",
+						"amount": "",
+						"unit": "kg/ha",
+						"category": "to describe an activity like till, no till, rotation?",
+						"appliedToCrop": "crop",
+						"dateStart": "MM-DD-YYYY",
+						"dateEnd": "MM-DD-YYYY",
+						"frequency": "text; ex annually in spring",
+						"method": "The method used",
+						"chemicalForm": "as Calcium Nitrate",
+						"notes": "additional comments"
+					}
+				]
+			}
+		],
+		"FactorCombinations": [
+			{
+				"name": "NPK",
+				"dateStart": "MM-DD-YYYY",
+				"dateEnd": "MM-DD-YYYY",
+				"description": "Description of this",
+				"factor": [
+					{
+						"Factor": "Phosphate",
+						"level": "P Rate 1",
+						"Comment": ""
+					},
+					{
+						"Factor": "Nitrate Fertilisation",
+						"level": "P Rate 1",
+						"Comment": ""
+					},
+					{
+						"Factor": "Potassium Fertilisation",
+						"level": "K Rate 1",
+						"Comment": ""
+					}
+				]
+			},
+			{
+				"name": "NP",
+				"dateStart": "MM-DD-YYYY",
+				"dateEnd": "MM-DD-YYYY",
+				"description": "Description of this",
+				"factor": [
+					{
+						"Factor": "Phosphate",
+						"level": "P Rate 1",
+						"Comment": ""
+					},
+					{
+						"Factor": "Nitrate Fertilisation",
+						"level": "P Rate 1",
+						"Comment": ""
+					}
+				]
 			}
 		]
 	}
