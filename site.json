@@ -3,13 +3,11 @@
 		"name": "Broadbalk Field",
 		"identifier": "",
 		"sameAs": "URL of the site",
-		"local_code": null,
-		"geonames_id": null,
 		"doi": null,
-		"type": "research station field",
-		"visits_allowed": true,
-		"visiting_arrangements": "Contact Andy Macdonald",
-		"history": "The first experimental crop was harvested in 1844 after a rotation of turnips (dunged) 1839, barley 1840, peas 1841, wheat 1842 and oats 1843. The last four crops being entirely unmanured. The field was therefore considered to be exhausted according to contemporary practice.",
+		"type": "Research station field",
+		"visitsAllowed": "yes",
+		"visitingArrangements": "Contact Andy Macdonald",
+		"description": "The first experimental crop was harvested in 1844 after a rotation of turnips (dunged) 1839, barley 1840, peas 1841, wheat 1842 and oats 1843. The last four crops being entirely unmanured. The field was therefore considered to be exhausted according to contemporary practice.",
 		"management": "The site is managed using conventional tillage and pesticide applications are applied as necessary, except for herbicide and fungicide exclusion plots.\n\nThe plough layer (0-23 m) is limed when necessary to maintain a minimum soil pH of 7.0 – 7.5."
 	},
 	"location": {
@@ -23,61 +21,70 @@
 		"geoLocationPlace": "Hoosfield",
 		"polygon": "POLYGON ((-0.374888910702653 51.8104844475642,-0.372679951388724 51.8102045570974,-0.370348821475626 51.8095475237691,-0.370968420874727 51.8082615111994,-0.373024938111275 51.8088099092504,-0.37549595953073 51.8091501530058,-0.374888910702653 51.8104844475642))",
 		"elevation": 130.0,
-		"elevation_unit": "Metres",
+		"elevationUnit": "Metres",
 		"slope": "Estimated slope in degrees",
-		"slope_aspect": null
+		"slopeAspect": null
 	},
 	"soil": {
-		"soil_type_label": "luvisol",
-		"soil_description": "The soil is classified as a Chromic luvisol. \n\nThe soil texture is described as clay loam to silty clay loam over clay-with flints. The soils contain a large number of flints and are slightly calcareous. Below about 2m depth the soil becomes chalk. The experiment is under-drained and the site is free draining. There is considerable variation in soil texture across the site, with clay contents ranging from 19 – 39%"
+		"soilTypeLabel": "luvisol",
+		"soilDescription": "The soil is classified as a Chromic luvisol. \n\nThe soil texture is described as clay loam to silty clay loam over clay-with flints. The soils contain a large number of flints and are slightly calcareous. Below about 2m depth the soil becomes chalk. The experiment is under-drained and the site is free draining. There is considerable variation in soil texture across the site, with clay contents ranging from 19 – 39%"
 	},
 	"soilProperty": [
 		{
-			"variableName": "",
-			"variableUnit": "",
+			"variableMeasured": "",
 			"isEstimated": "",
 			"isBaseline": "",
-			"typical": "",
-			"min": "",
-			"max": "",
+			"valueReference": "",
+			"minValue": "",
+			"maxValue": "",
+			"value": "",
 			"minSampleDepth": "",
 			"maxSampleDepth": "",
-			"sampleUnit": "",
-			"refYear": ""
+			"unitCode": "",
+			"unitText": "",
+			"refYear": "",
+			"measurementTechnique": "",
+			"description": ""
 		},
 		{
-			"variableName": "",
-			"variableUnit": "",
+			"variableMeasured": "",
 			"isEstimated": "",
 			"isBaseline": "",
-			"typical": "",
-			"min": "",
-			"max": "",
+			"valueReference": "",
+			"minValue": "",
+			"maxValue": "",
+			"value": "",
 			"minSampleDepth": "",
 			"maxSampleDepth": "",
-			"sampleUnit": "",
-			"refYear": ""
+			"unitCode": "",
+			"unitText": "",
+			"refYear": "",
+			"measurementTechnique": "",
+			"description": ""
 		},
 		{
-			"variableName": "",
-			"variableUnit": "",
+			"variableMeasured": "",
 			"isEstimated": "",
 			"isBaseline": "",
-			"typical": "",
-			"min": "",
-			"max": "",
+			"valueReference": "",
+			"minValue": "",
+			"maxValue": "",
+			"value": "",
 			"minSampleDepth": "",
 			"maxSampleDepth": "",
-			"sampleUnit": "",
-			"refYear": ""
+			"unitCode": "",
+			"unitText": "",
+			"refYear": "",
+			"measurementTechnique": "",
+			"description": ""
 		}
 	],
 	"climate": {
-		"climatic_type_label": null,
-		"climate_description": null,
+		"name": "Temperate",
+		"description": "Cool, wet winters and warm, wet summers. It rarely features the extremes of heat or cold, drought or wind that are common in other climates. The weather conditions are also very changeable.",
 		"weatherStation": {
-			"weatherStationID": "",
-			"name": "",
+			"weatherStationID": "ROTH",
+			"name": "Rothmet",
 			"distance": "230",
 			"direction": "W"
 		}
