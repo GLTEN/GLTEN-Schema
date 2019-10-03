@@ -99,7 +99,137 @@ def prepareExperiment(data):
     dateEnd= data['end_year'],
     funder= prepareFunders() 
 )
+def prepareSoilProperties():
+#     [
+#         {
+#             "variableMeasured": "",
+#             "isEstimated": "",
+#             "isBaseline": "",
+#             "valueReference": "",
+#             "minValue": "",
+#             "maxValue": "",
+#             "value": "",
+#             "minSampleDepth": "",
+#             "maxSampleDepth": "",
+#             "unitCode": "",
+#             "unitText": "",
+#             "refYear": "",
+#             "measurementTechnique": "",
+#             "description": ""
+#         },
+#         {
+#             "variableMeasured": "",
+#             "isEstimated": "",
+#             "isBaseline": "",
+#             "valueReference": "",
+#             "minValue": "",
+#             "maxValue": "",
+#             "value": "",
+#             "minSampleDepth": "",
+#             "maxSampleDepth": "",
+#             "unitCode": "",
+#             "unitText": "",
+#             "refYear": "",
+#             "measurementTechnique": "",
+#             "description": ""
+#         },
+#         {
+#             "variableMeasured": "",
+#             "isEstimated": "",
+#             "isBaseline": "",
+#             "valueReference": "",
+#             "minValue": "",
+#             "maxValue": "",
+#             "value": "",
+#             "minSampleDepth": "",
+#             "maxSampleDepth": "",
+#             "unitCode": "",
+#             "unitText": "",
+#             "refYear": "",
+#             "measurementTechnique": "",
+#             "description": ""
+#         }
+#     ] 
+    return "TODO"
+
+def prepareSite(data):
+    return dict(
+        
+    administrative= dict (
+        name=  data['site_name'],
+        identifier=  data['site_local_code'],
+        type = data['site_type_label'],
+        sameAs=  data['data_statement_label'],
+        doi=  data['site_doi'],
+        visitsAllowed=  data['site_visits_allowed'],
+        visitingArrangements= data['site_visiting_arrangements'],
+        description= data['site_history'],
+        management= data['site_management']
+    ),
+    location= dict(
+        addressLocality= data['site_locality'],
+        addressRegion= data['site_region'],
+        addressCountry= data['site_country'],
+        geoLocationPoint= dict(
+            pointLongitude= data['site_centroid_longitude'],
+            pointLatitude= data['site_centroid_latitude']
+            ),
+        geoLocationPlace= data['site_country'],
+        polygon= "NOT IN GLTEN",
+        elevation= data['site_elevation'],
+        elevationUnit= data['site_elevation_unit'],
+        slope= data['site_slope'],
+        slopeAspect= data['site_slope_aspect']
+    ),
+    soil= dict (
+        soilTypeLabel= data['site_soil_type_label'],
+        soilDescription= data['site_soil_description']
+    ),
+    soilProperty= prepareSoilProperties(),
+    climate= dict(
+        name= data['site_climatic_type_label'],
+        description= data['site_soil_description'],
+        weatherStation= dict(
+            weatherStationID= "NOT IN GLTEN",
+            name= "NOT IN GLTEN",
+            distance="NOT IN GLTEN",
+            direction="NOT IN GLTEN"
+            )
+        )
     
+
+        )
+
+def preparePersons(data):
+    contributors = []
+    for details in data['people']:
+        sname = details['name'].split() 
+        #assuming name = givenName familyName
+        contributors.append(dict
+                            (  
+                                type= "Person",
+            jobTitle= details['role_term'],
+            name= details['name'],
+            givenName= sname[0],
+            familyName= sname[1],
+            sameAs= details['orcid'],
+            address= dict(
+                type= "PostalAddress",
+                streetAddress= "not in GLTEN",
+                addressLocality= "not in GLTEN",
+                addressRegion= "not in GLTEN",
+                postalCode= "not in GLTEN",
+                addressCountry= "not in GLTEN"
+            ),
+            affiliation= dict (
+                type= "Organization",
+                name= "Computational and Analytical Sciences, Rothamsted Research",
+                address= ", West Common, Harpenden, Hertfordshire, AL5 2JQ, United Kingdom"
+            )
+            )
+                            )
+    return contributors
+       
 if __name__ == '__main__':
     exptID = 0
     while type(exptID) != int or exptID == 0:
@@ -108,6 +238,12 @@ if __name__ == '__main__':
     
     data = getData(exptID)
     experiment = prepareExperiment(data)   
+    site = prepareSite(data)
+    persons = dict (contributors = preparePersons(data))
     
-    strJsDoc =  json.dumps(experiment, indent=4)
-    print(strJsDoc)
+    experimentJson =  json.dumps(experiment, indent=4)
+    print("experiment = " + experimentJson)
+    siteJson =  json.dumps(site, indent=4)
+    print("site = " + siteJson)
+    personJson =  json.dumps(persons, indent=4)
+    print("person = " + personJson)
