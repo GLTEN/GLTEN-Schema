@@ -45,7 +45,9 @@ def prepareRelatedExperiments():
 #         ]
     return "TODO"
 
-def prepareFunders():
+def prepareFunders(data):
+    funders = "NOT in GLTEN"
+    
 #     [
 #         {
 #             "type": "organization",
@@ -65,7 +67,39 @@ def prepareFunders():
 #             "endDate": "2010"
 #         }
 #     ]
-    return "TODO"
+    return funders
+
+def prepareCitation(data):
+    citation = []
+    for details in data['literature']:
+        citation.append(dict(
+            type= "creativeWork",
+            identifier= details['doi'],
+            sameAs= details['doi'],
+            citation= details['title'],
+            inLanguage=  details['language'],
+            relationType= "isCitedBy"
+            
+            ))
+# [    
+#         {
+#             "type": "creativeWork",
+#             "identifier": "https://doi.org/10.1111/j.1475-2743.2006.00003.x",
+#             "sameAs": "https://doi.org/10.1111/j.1475-2743.2006.00003.x",
+#             "title": "Gibbs, P. A. , Chambers, B. J. , Chaudri, A. M. , McGrath, S. P. , Carlton-Smith, C. H. , Bacon, J. R. , Campbell, C. D. and Aitken, M. N. (2006) \"Initial results from a long-term, multi-site field study of the effects on soil fertility and microbial activity of sludge cakes containing heavy metals\", Soil Use and Management, 22, 11-21",
+#             "inLanguage": "English",
+#             "relationType": "isCitedBy"
+#         },
+#         {
+#             "type": "creativeWork",
+#             "identifier": "https://doi.org/10.1111/j.1475-2743.2006.00003.x",
+#             "sameAs": "https://doi.org/10.1111/j.1475-2743.2006.00003.x",
+#             "title": "Gibbs, P. A. , Chambers, B. J. , Chaudri, A. M. , McGrath, S. P. , Carlton-Smith, C. H. , Bacon, J. R. , Campbell, C. D. and Aitken, M. N. (2006) \"Initial results from a long-term, multi-site field study of the effects on soil fertility and microbial activity of sludge cakes containing heavy metals\", Soil Use and Management, 22, 11-21",
+#             "inLanguage": "English",
+#             "relationType": "isCitedBy"
+#         }
+#     ]
+    return citation
 
 def prepareExperiment(data):
     return dict(
@@ -97,60 +131,31 @@ def prepareExperiment(data):
     dateStart= data['start_year'],
     dateEPEnd= data['establishment_period_end'],
     dateEnd= data['end_year'],
-    funder= prepareFunders() 
+    funder= prepareFunders(data) ,
+    citation = prepareCitation(data)
 )
-def prepareSoilProperties():
-#     [
-#         {
-#             "variableMeasured": "",
-#             "isEstimated": "",
-#             "isBaseline": "",
-#             "valueReference": "",
-#             "minValue": "",
-#             "maxValue": "",
-#             "value": "",
-#             "minSampleDepth": "",
-#             "maxSampleDepth": "",
-#             "unitCode": "",
-#             "unitText": "",
-#             "refYear": "",
-#             "measurementTechnique": "",
-#             "description": ""
-#         },
-#         {
-#             "variableMeasured": "",
-#             "isEstimated": "",
-#             "isBaseline": "",
-#             "valueReference": "",
-#             "minValue": "",
-#             "maxValue": "",
-#             "value": "",
-#             "minSampleDepth": "",
-#             "maxSampleDepth": "",
-#             "unitCode": "",
-#             "unitText": "",
-#             "refYear": "",
-#             "measurementTechnique": "",
-#             "description": ""
-#         },
-#         {
-#             "variableMeasured": "",
-#             "isEstimated": "",
-#             "isBaseline": "",
-#             "valueReference": "",
-#             "minValue": "",
-#             "maxValue": "",
-#             "value": "",
-#             "minSampleDepth": "",
-#             "maxSampleDepth": "",
-#             "unitCode": "",
-#             "unitText": "",
-#             "refYear": "",
-#             "measurementTechnique": "",
-#             "description": ""
-#         }
-#     ] 
-    return "TODO"
+    
+def prepareSoilProperties(data):
+    soilProperties = []
+    for details in data['site_soil_properties']:
+        soilProperties.append(dict (  
+            variableMeasured= details['variable_term'],
+            isEstimated= details['is_estimated'],
+            isBaseline= details['is_baseline'],
+            valueReference= details['typical_value'],
+            minValue= details['min_value'],
+            maxValue= details['max_value'],
+            minSampleDepth= details['min_depth'],
+            maxSampleDepth= details['max_depth'],
+            unitCode= details['unit_term'],
+            unitText= details['unit_label'],
+            refYear= details['reference_year'],
+            measurementTechnique= "NOT IN GLTN",
+            description= "NOT IN GLTN"
+            )
+        )
+    return soilProperties
+
 
 def prepareSite(data):
     return dict(
@@ -185,7 +190,7 @@ def prepareSite(data):
         soilTypeLabel= data['site_soil_type_label'],
         soilDescription= data['site_soil_description']
     ),
-    soilProperty= prepareSoilProperties(),
+    soilProperty= prepareSoilProperties(data),
     climate= dict(
         name= data['site_climatic_type_label'],
         description= data['site_soil_description'],

@@ -49,7 +49,8 @@
 			"identifier": "https://gtr.ukri.org/projects?ref=BBS%2FE%2FC%2F000J0300",
 			"startDate": "2000",
 			"endDate": "2010"
-		},		{
+		},
+		{
 			"type": "organization",
 			"name": "Biotechnology and Biological Sciences Research Council",
 			"sameAs": "http://dx.doi.org/10.13039/501100000268",
@@ -57,6 +58,24 @@
 			"identifier": "https://gtr.ukri.org/projects?ref=BBS%2FE%2FC%2F000J0300",
 			"startDate": "2000",
 			"endDate": "2010"
+		}
+	],
+	"citation": [
+		{
+			"type": "creativeWork",
+			"identifier": "https://doi.org/10.1111/j.1475-2743.2006.00003.x",
+			"sameAs": "https://doi.org/10.1111/j.1475-2743.2006.00003.x",
+			"title": "Gibbs, P. A. , Chambers, B. J. , Chaudri, A. M. , McGrath, S. P. , Carlton-Smith, C. H. , Bacon, J. R. , Campbell, C. D. and Aitken, M. N. (2006) \"Initial results from a long-term, multi-site field study of the effects on soil fertility and microbial activity of sludge cakes containing heavy metals\", Soil Use and Management, 22, 11-21",
+			"inLanguage": "English",
+			"relationType": "isCitedBy"
+		},
+		{
+			"type": "creativeWork",
+			"identifier": "https://doi.org/10.1111/j.1475-2743.2006.00003.x",
+			"sameAs": "https://doi.org/10.1111/j.1475-2743.2006.00003.x",
+			"title": "Gibbs, P. A. , Chambers, B. J. , Chaudri, A. M. , McGrath, S. P. , Carlton-Smith, C. H. , Bacon, J. R. , Campbell, C. D. and Aitken, M. N. (2006) \"Initial results from a long-term, multi-site field study of the effects on soil fertility and microbial activity of sludge cakes containing heavy metals\", Soil Use and Management, 22, 11-21",
+			"inLanguage": "English",
+			"relationType": "isCitedBy"
 		}
 	]
 }
