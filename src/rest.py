@@ -5,6 +5,7 @@ This tests the fact that I can use rest to interrogate GLTEN and return their js
 @author: castells
 '''
 import requests
+import settings
 import json
 
 class APIError(Exception):
@@ -28,22 +29,20 @@ def getData(exptID):
         #print('{} {}'.format(todo_item['id'], todo_item['summary']))
     data =  gltenData.json()
     return data
-def prepareRelatedExperiments():
-#      [
-#             {
-#                 "type": "Experiment",
-#                 "identifier": "10.23637/Sax-rrn2-1 - that would be the DOI - Unique Identifier",
-#                 "localIdentifier": "rrn2 - Use the code for the experiment - Local Identifier",
-#                 "name": "Saxmundahm Rotation 2"
-#             },
-#             {
-#                 "type": "Experiment",
-#                 "identifier": "10.23637/Sax-rrn2-1 - that would be the DOI - Unique Identifier",
-#                 "localIdentifier": "rrn2 - Use the code for the experiment - Local Identifier",
-#                 "name": "Saxmundahm Rotation 2"
-#             }
-#         ]
-    return "TODO"
+def prepareRelatedExperiments(REdata):
+    
+    relatedExperiments = []
+    if REdata:
+        for detailRE in REdata:
+            relatedExperiments.append(dict(
+                type= "Experiment",
+               identifier= "10.23637/Sax-rrn2-1 - that would be the DOI - Unique Identifier",
+               localIdentifier= "rrn2 - Use the code for the experiment - Local Identifier",
+               name= "Saxmundahm Rotation 2"
+                ))
+    else: 
+        relatedExperiments = "Not In GLTEN"
+    return relatedExperiments
 
 def prepareFunders(data):
     funders = "NOT in GLTEN"
@@ -81,24 +80,7 @@ def prepareCitation(data):
             relationType= "isCitedBy"
             
             ))
-# [    
-#         {
-#             "type": "creativeWork",
-#             "identifier": "https://doi.org/10.1111/j.1475-2743.2006.00003.x",
-#             "sameAs": "https://doi.org/10.1111/j.1475-2743.2006.00003.x",
-#             "title": "Gibbs, P. A. , Chambers, B. J. , Chaudri, A. M. , McGrath, S. P. , Carlton-Smith, C. H. , Bacon, J. R. , Campbell, C. D. and Aitken, M. N. (2006) \"Initial results from a long-term, multi-site field study of the effects on soil fertility and microbial activity of sludge cakes containing heavy metals\", Soil Use and Management, 22, 11-21",
-#             "inLanguage": "English",
-#             "relationType": "isCitedBy"
-#         },
-#         {
-#             "type": "creativeWork",
-#             "identifier": "https://doi.org/10.1111/j.1475-2743.2006.00003.x",
-#             "sameAs": "https://doi.org/10.1111/j.1475-2743.2006.00003.x",
-#             "title": "Gibbs, P. A. , Chambers, B. J. , Chaudri, A. M. , McGrath, S. P. , Carlton-Smith, C. H. , Bacon, J. R. , Campbell, C. D. and Aitken, M. N. (2006) \"Initial results from a long-term, multi-site field study of the effects on soil fertility and microbial activity of sludge cakes containing heavy metals\", Soil Use and Management, 22, 11-21",
-#             "inLanguage": "English",
-#             "relationType": "isCitedBy"
-#         }
-#     ]
+
     return citation
 
 def prepareExperiment(data):
@@ -111,7 +93,7 @@ def prepareExperiment(data):
         url=  data['url'],
         description= data['description'],
         disambiguatingDescription= data['objective'],
-        relatedExperiment= prepareRelatedExperiments()
+        relatedExperiment= prepareRelatedExperiments(data['objective'])
     ),
     dataAccess= dict(
         type= "creativeWork",
@@ -201,8 +183,6 @@ def prepareSite(data):
             direction="NOT IN GLTEN"
             )
         )
-    
-
         )
 
 def preparePersons(data):
@@ -234,21 +214,191 @@ def preparePersons(data):
             )
                             )
     return contributors
-       
+
+def prepareLevel(leveldata):
+    levels = []
+    for leveldetails in leveldata:
+        levels.append(dict(
+            name= leveldetails['factor_variant_label'],
+                        amount= leveldetails['amount'],
+                        unitCode= leveldetails['amount_unit_term'],
+                        unitText= leveldetails['amount_unit_label'],
+                        appliedToCrop= leveldetails['crop_id'],
+                        dateStart= leveldetails['start_year'],
+                        dateEnd= leveldetails['end_year'],
+                        frequency= leveldetails['application_frequency'],
+                        method= leveldetails['application_method_label'],
+                        chemicalForm= leveldetails['chemical_form_label'],
+                        notes= leveldetails['note']
+            ))
+    return levels
+
+def prepareFactors(factordata):
+    factors = []
+    
+    for factordetails in factordata:
+        factors.append(dict(name =  factordetails['factor_term'],                 
+             description = factordetails['description'],
+             effect= factordetails['effect'],                 
+             plotApplication= factordetails['factor_term'],
+             level= prepareLevel(factordetails['levels'])             
+     ))
+    return factors
+
+def prepareFCFactors (FCFactorData):
+    FCFactors = []
+    for FCFDetails in FCFactorData:
+        FCFactors.append(dict(
+            Factor= FCFDetails['name'],
+                        level= "P Rate 1",
+                        Comment= ""
+            ))
+    return FCFactors
+    
+def prepareFactorCombinations(factorcombinationData):
+    factorCombinations = []
+   
+#     for FCDetails in factorcombinationData:
+#         preparedfactor= prepareFCFactors (FCDetails['factor']) if FCDetails['factor'] else "NA"
+#         factorCombinations.append(dict(
+#             name= FCDetails['name'],
+#                 dateStart= "MM-DD-YYYY",
+#                 dateEnd= "MM-DD-YYYY",
+#                 description= "Description of this",
+#                 factor= preparedfactor 
+#             ))
+    return factorCombinations
+
+def prepareCrops(cropData):
+    crops = []
+    for detailCrop in cropData:
+        crops.append(dict(
+            name= detailCrop['crop_term'],
+                #identifier= detailCrop['crop_term'],
+                #sameAs= detailCrop['crop_label'],
+                dateStart= detailCrop['start_year'],
+                dateEnd= detailCrop['end_year']
+            ))
+    return crops
+
+def preparePhases(phaseData):
+    phases = []
+    for phaseDetail in phaseData:
+        phases.append(dict(
+            samePhase= phaseDetail['same_phase'],
+            crop= phaseDetail['crop_id'],
+            description= phaseDetail['notes']
+            ))
+    return phases
+
+def prepareCropRotations(rotationdata):
+    rotations = []
+    for detailRotation in rotationdata:
+        preparedrotationPhases=preparePhases(detailRotation['phases']) if detailRotation['phases'] else "Not in GLTEN"
+        rotations.append(dict(
+            name= detailRotation['name'],
+                dateStart= detailRotation['start_year'],
+                dateEnd= detailRotation['end_year'],
+                phasing= detailRotation['phasing'],
+                isTreatment= detailRotation['is_treatment'],
+                rotationPhases= preparedrotationPhases
+            ))
+    return rotations
+def prepareMeasurements(measurementData):
+    measurements = []
+    for detailMeasurements in measurementData:
+        measurements.append(dict(
+            variable= detailMeasurements['variable_term'],
+            unitCode= detailMeasurements['unit_term'],
+            unitText= detailMeasurements['unit_label'],
+            collectionFrequency= detailMeasurements['collection_frequency'],
+            scale= detailMeasurements['scale'],
+            material= detailMeasurements['material'],
+            description= detailMeasurements['comment'],
+            crop = detailMeasurements['crop_id']
+        ))
+    return measurements
+
+def prepareDesigns(data):
+    designs = []
+    item = 0
+    for details in data['periods']:
+        preparedcrops = prepareCrops(details['crops']) if details['crops'] else "NA"
+        preparedcropRotations = prepareCropRotations(details['rotations']) if details['rotations'] else "NA"
+        preparedfactor = prepareFactors(details['factors']) if details['factors'] else "NA"
+        preparedfactorCombinations = prepareFactorCombinations(details['factor_combinations']) if details['factor_combinations'] else "NA"
+        preparedmeasurements = prepareMeasurements(details['measurements']) if details['measurements'] else "NA"
+        designs.append(dict ( 
+            administrative= dict( 
+            type= "experiment",
+            identifier= details['name'],
+            localIdentifier= details['name'],
+            name= details['name'],
+            url= details['name'],
+            description= str(details['design_description']) + str(details['description'])
+        ),
+        design= dict( 
+            dateStart= details['start_year'],
+            dateEnd= details['end_year'],
+            description= details['description'],
+            studyDesign= details['name'],
+            factorNumber= details['name'],
+            numberOdBlocks = details['number_of_blocks'],
+            numberOfPlots= details['number_of_plots'],
+            numberOfReplicates= details['number_of_replicates'],
+            numberOfSubplots= details['number_of_subplots'],            
+            area= "Experiment area",
+            areaUnit= "Experiment area units",
+            plotWidth= "Plot width",
+            plotWidthUnit= "Plot width Unit",
+            plotLength= "Plot length",
+            plotLengthUnit= "Plot length Unit",
+            plotArea= "Plot area",
+            plotAreaUnit= "Plot area Unit",
+            plotSpacing= "Plot spacing",
+            plotSpacingUnit= "Plot spacing Unit",
+            plotOrientation= "Plot orientation",
+            numberHarvest= "Number of harvests per year"
+        ),
+        crops = preparedcrops,
+        cropRotations = preparedcropRotations,
+        factor = preparedfactor,
+        factorCombinations = preparedfactorCombinations,
+        measurements = preparedmeasurements
+        
+        )
+            )
+        
+        item += 1
+    return designs
+     
 if __name__ == '__main__':
     exptID = 0
+    print(settings.experiments)
+    
     while type(exptID) != int or exptID == 0:
         exptID = int(input('Which experiment GLTENID? '))
         
     
     data = getData(exptID)
-    experiment = prepareExperiment(data)   
-    site = prepareSite(data)
-    persons = dict (contributors = preparePersons(data))
+    folder = [key  for (key, value) in settings.experiments.items() if value == exptID]
+    print(folder)
     
+    experiment = prepareExperiment(data) 
     experimentJson =  json.dumps(experiment, indent=4)
     print("experiment = " + experimentJson)
+      
+    site = prepareSite(data)
     siteJson =  json.dumps(site, indent=4)
     print("site = " + siteJson)
+    
+       
+    persons = dict (contributors = preparePersons(data))
     personJson =  json.dumps(persons, indent=4)
-    print("person = " + personJson)
+    print("person = " + personJson)    
+    
+    design = prepareDesigns(data)
+    designsJson = json.dumps(design, indent=4)
+    print("design = "+ designsJson)
+    
+    
