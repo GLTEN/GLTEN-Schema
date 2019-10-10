@@ -11,7 +11,12 @@ DEFAULT = "metadata/default/"
 
 experiments = dict(
     rbk1=1,
+    rhb2=36,
     wrn3=37,
+    rwf3=41,
+    rcs408=51,
     srn1=52,
+    rcs10=53,
+    wcs428=69,
     srn2=75
     )

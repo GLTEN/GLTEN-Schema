@@ -6,9 +6,12 @@ This tests the fact that I can use rest to interrogate GLTEN and return their js
 
 @TODO: colect the IDs that come from GLTN so that I can get the labels from there. 
 '''
+import pyodbc
 import requests
 import settings
+import configparser
 import json
+from pygments.lexers import sql
 
 class APIError(Exception):
     """An API Error Exception"""
@@ -18,6 +21,44 @@ class APIError(Exception):
 
     def __str__(self):
         return "APIError: status={}".format(self.status)
+    
+def connect():
+    config = configparser.ConfigParser()
+    config.read('config.ini')
+    dsn=config['SQL_SERVER']['DSN']
+    uid = config['SQL_SERVER']['UID']
+    pwd = config['SQL_SERVER']['PWD']
+    con = pyodbc.connect('DSN='+dsn+';uid='+uid+';pwd='+pwd)
+    #con = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=Z:\website development\datacite\DataCite Metadata database.accdb;')
+    #con = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\code\access\DataCite Metadata database.accdb;')
+    return con
+
+
+def getCursor():
+    """Returns a new Cursor object using the connection"""
+    con = connect()
+    cur = con.cursor()
+    return cur
+
+
+def getGLTENIDs():
+    """
+    Returns a dictionary with all the timelines. This is then printed to offer use the choice
+    """
+    cur = getCursor()
+    GLTENIDs = []
+    sql = 'SELECT  experiment_name, experiment_code,  GLTENID FROM experiment where GLTENID is not null;'
+    cur.execute(sql)
+    results = cur.fetchall()    
+    for row in results: 
+
+        GLTENIDs.append(dict(
+            experiment_name = row.experiment_name,
+            folder = row.experiment_code.replace('/','').lower(),
+            GLTENID = row.GLTENID
+            ))
+           
+    return GLTENIDs
 
 def getData(exptID):
     base = "https://glten.org/api/v0/public/experiment/"
@@ -39,12 +80,12 @@ def prepareRelatedExperiments(REdata):
         for detailRE in REdata:
             relatedExperiments.append(dict(
                 type= "Experiment",
-               identifier= "10.23637/Sax-rrn2-1 - that would be the DOI - Unique Identifier",
-               localIdentifier= "rrn2 - Use the code for the experiment - Local Identifier",
-               name= "Saxmundahm Rotation 2"
+                identifier= "10.23637/Sax-rrn2-1 - that would be the DOI - Unique Identifier",
+                localIdentifier= "rrn2 - Use the code for the experiment - Local Identifier",
+                name= "Saxmundahm Rotation 2"
                 ))
     else: 
-        relatedExperiments = "Not In GLTEN"
+        relatedExperiments = "NA"
     return relatedExperiments
 
 def prepareFunders(data):
@@ -96,7 +137,7 @@ def prepareExperiment(data):
         url=  data['url'],
         description= data['description'],
         disambiguatingDescription= data['objective'],
-        relatedExperiment= prepareRelatedExperiments(data['objective'])
+        #relatedExperiment= prepareRelatedExperiments(data['related_experiments'])
     ),
     dataAccess= dict(
         type= "creativeWork",
@@ -389,32 +430,59 @@ def prepareDesigns(data):
     return designs
      
 if __name__ == '__main__':
-    exptID = 0
-    print(settings.experiments)
     
+    exptID = 0
+    GLTENIDs = getGLTENIDs()
+
+    for items in GLTENIDs:
+        print (" %s (%s) GLTENID =  %s" % (items['experiment_name'],items['folder'], items['GLTENID']))
+
+    print('\n')
     while type(exptID) != int or exptID == 0:
         exptID = int(input('Which experiment GLTENID? '))
         
+
     
     data = getData(exptID)
-    folder = [key  for (key, value) in settings.experiments.items() if value == exptID]
+    
+    for items in GLTENIDs:
+        if items['GLTENID']== exptID:
+            folder = items['folder']
+  
     print(folder)
     
     experiment = prepareExperiment(data) 
     experimentJson =  json.dumps(experiment, indent=4)
-    print("experiment = " + experimentJson)
+    xname = settings.STAGE+ "metadata/"+str(folder)+"/experiment.json"
+    fxname = open(xname,'w+')
+    fxname.write(experimentJson)
+    fxname.close()
+    print("experiment.json saved in  = " + xname)
       
     site = prepareSite(data)
     siteJson =  json.dumps(site, indent=4)
-    print("site = " + siteJson)
+    xname = settings.STAGE+ "metadata/"+str(folder)+"/site.json"
+    fxname = open(xname,'w+')
+    fxname.write(siteJson)
+    fxname.close()
+    print("site.json saved in  = " + xname)
     
        
     persons = dict (contributors = preparePersons(data))
     personJson =  json.dumps(persons, indent=4)
-    print("person = " + personJson)    
+    xname = settings.STAGE+ "metadata/"+str(folder)+"/person.json"
+    fxname = open(xname,'w+')
+    fxname.write(personJson)
+    fxname.close()
+    print("person.json saved in  = " + xname) 
     
     design = prepareDesigns(data)
     designsJson = json.dumps(design, indent=4)
-    print("design = "+ designsJson)
+    xname = settings.STAGE+ "metadata/"+str(folder)+"/design.json"
+    fxname = open(xname,'w+')
+    fxname.write(designsJson)
+    fxname.close()
+    print("design.json saved in  = " + xname) 
+    
     
     
