@@ -428,21 +428,8 @@ def prepareDesigns(data):
         
         item += 1
     return designs
-     
-if __name__ == '__main__':
-    
-    exptID = 0
-    GLTENIDs = getGLTENIDs()
 
-    for items in GLTENIDs:
-        print (" %s (%s) GLTENID =  %s" % (items['experiment_name'],items['folder'], items['GLTENID']))
-
-    print('\n')
-    while type(exptID) != int or exptID == 0:
-        exptID = int(input('Which experiment GLTENID? '))
-        
-
-    
+def process(exptID):
     data = getData(exptID)
     
     for items in GLTENIDs:
@@ -483,6 +470,32 @@ if __name__ == '__main__':
     fxname.write(designsJson)
     fxname.close()
     print("design.json saved in  = " + xname) 
+
+
+if __name__ == '__main__':
+    
+    exptID = 0
+    
+    GLTENIDs = getGLTENIDs()
+    IDs = []
+          
+    for items in GLTENIDs:
+        print (" %s (%s) GLTENID =  %s" % (items['experiment_name'],items['folder'], items['GLTENID']))
+        IDs.append(items['GLTENID'])
+        
+    print(IDs)
+    print('\n')
     
     
+    while exptID == 0:
+        val = input('Which experiment GLTENID? ')
+        try: 
+            exptID = int(val)
+            if exptID  not in IDs:
+                print("not in the list")
+                exptID = 0
+        except ValueError:
+            print("No.. input string is not an Integer. It's a string")
+      
+    process(exptID)
     
