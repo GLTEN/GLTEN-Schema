@@ -3,6 +3,8 @@ Created on 1 Oct 2019
 This tests the fact that I can use rest to interrogate GLTEN and return their json string
 
 @author: castells
+
+@TODO: colect the IDs that come from GLTN so that I can get the labels from there. 
 '''
 import requests
 import settings
@@ -29,6 +31,7 @@ def getData(exptID):
         #print('{} {}'.format(todo_item['id'], todo_item['summary']))
     data =  gltenData.json()
     return data
+
 def prepareRelatedExperiments(REdata):
     
     relatedExperiments = []
@@ -198,14 +201,14 @@ def preparePersons(data):
             givenName= sname[0],
             familyName= sname[1],
             sameAs= details['orcid'],
-            address= dict(
-                type= "PostalAddress",
-                streetAddress= "not in GLTEN",
-                addressLocality= "not in GLTEN",
-                addressRegion= "not in GLTEN",
-                postalCode= "not in GLTEN",
-                addressCountry= "not in GLTEN"
-            ),
+#             address= dict(
+#                 type= "PostalAddress",
+#                 streetAddress= "not in GLTEN",
+#                 addressLocality= "not in GLTEN",
+#                 addressRegion= "not in GLTEN",
+#                 postalCode= "not in GLTEN",
+#                 addressCountry= "not in GLTEN"
+#             ),
             affiliation= dict (
                 type= "Organization",
                 name= "Computational and Analytical Sciences, Rothamsted Research",
@@ -219,6 +222,7 @@ def prepareLevel(leveldata):
     levels = []
     for leveldetails in leveldata:
         levels.append(dict(
+            id= leveldetails['id'],
             name= leveldetails['factor_variant_label'],
                         amount= leveldetails['amount'],
                         unitCode= leveldetails['amount_unit_term'],
@@ -237,36 +241,47 @@ def prepareFactors(factordata):
     factors = []
     
     for factordetails in factordata:
-        factors.append(dict(name =  factordetails['factor_term'],                 
-             description = factordetails['description'],
-             effect= factordetails['effect'],                 
-             plotApplication= factordetails['factor_term'],
-             level= prepareLevel(factordetails['levels'])             
+        factors.append(dict(
+            id= factordetails['id'],
+            name =  factordetails['factor_term'],                 
+            description = factordetails['description'],
+            effect= factordetails['effect'],                 
+            plotApplication= factordetails['factor_term'],
+            level= prepareLevel(factordetails['levels'])             
      ))
     return factors
 
-def prepareFCFactors (FCFactorData):
+def prepareFCFactors (FCFactorData, factordata):
     FCFactors = []
     for FCFDetails in FCFactorData:
+        for item in factordata:            
+            if item['id']==FCFDetails['factor_id']:
+                factorName = item['factor_term']
+                for levelitems in item['levels']:                    
+                    if levelitems['id'] == FCFDetails['factor_level_id']:
+                        levelNameText = levelitems['factor_variant_term']  
+                        levelNameCode =  levelitems['factor_variant_label']             
+                
         FCFactors.append(dict(
-            Factor= FCFDetails['name'],
-                        level= "P Rate 1",
-                        Comment= ""
+            Factor= factorName,
+            levelCode= levelNameCode,
+            levelText = levelNameText,
+            Comment= FCFDetails['comment']
             ))
     return FCFactors
     
-def prepareFactorCombinations(factorcombinationData):
+def prepareFactorCombinations(factorcombinationData, factordata):
     factorCombinations = []
-   
-#     for FCDetails in factorcombinationData:
-#         preparedfactor= prepareFCFactors (FCDetails['factor']) if FCDetails['factor'] else "NA"
-#         factorCombinations.append(dict(
-#             name= FCDetails['name'],
-#                 dateStart= "MM-DD-YYYY",
-#                 dateEnd= "MM-DD-YYYY",
-#                 description= "Description of this",
-#                 factor= preparedfactor 
-#             ))
+    if factorcombinationData:
+        for FCDetails in factorcombinationData:
+            preparedfactor= prepareFCFactors(FCDetails['members'],factordata) if FCDetails['members'] else "NA"
+            factorCombinations.append(dict(
+                name= FCDetails['name'],
+                    dateStart= FCDetails['start_year'],
+                    dateEnd= FCDetails['end_year'],
+                    description= FCDetails['description'],
+                    factor= preparedfactor 
+            ))
     return factorCombinations
 
 def prepareCrops(cropData):
@@ -326,8 +341,9 @@ def prepareDesigns(data):
         preparedcrops = prepareCrops(details['crops']) if details['crops'] else "NA"
         preparedcropRotations = prepareCropRotations(details['rotations']) if details['rotations'] else "NA"
         preparedfactor = prepareFactors(details['factors']) if details['factors'] else "NA"
-        preparedfactorCombinations = prepareFactorCombinations(details['factor_combinations']) if details['factor_combinations'] else "NA"
+        preparedfactorCombinations = prepareFactorCombinations(details['factor_combinations'],details['factors']) if details['factor_combinations'] else "NA"
         preparedmeasurements = prepareMeasurements(details['measurements']) if details['measurements'] else "NA"
+        
         designs.append(dict ( 
             administrative= dict( 
             type= "experiment",
@@ -347,18 +363,18 @@ def prepareDesigns(data):
             numberOfPlots= details['number_of_plots'],
             numberOfReplicates= details['number_of_replicates'],
             numberOfSubplots= details['number_of_subplots'],            
-            area= "Experiment area",
-            areaUnit= "Experiment area units",
-            plotWidth= "Plot width",
-            plotWidthUnit= "Plot width Unit",
-            plotLength= "Plot length",
-            plotLengthUnit= "Plot length Unit",
-            plotArea= "Plot area",
-            plotAreaUnit= "Plot area Unit",
-            plotSpacing= "Plot spacing",
-            plotSpacingUnit= "Plot spacing Unit",
-            plotOrientation= "Plot orientation",
-            numberHarvest= "Number of harvests per year"
+#             area= "Experiment area",
+#             areaUnit= "Experiment area units",
+#             plotWidth= "Plot width",
+#             plotWidthUnit= "Plot width Unit",
+#             plotLength= "Plot length",
+#             plotLengthUnit= "Plot length Unit",
+#             plotArea= "Plot area",
+#             plotAreaUnit= "Plot area Unit",
+#             plotSpacing= "Plot spacing",
+#             plotSpacingUnit= "Plot spacing Unit",
+#             plotOrientation= "Plot orientation",
+#             numberHarvest= "Number of harvests per year"
         ),
         crops = preparedcrops,
         cropRotations = preparedcropRotations,
