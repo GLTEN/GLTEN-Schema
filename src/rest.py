@@ -392,7 +392,7 @@ def prepareDesigns(data):
             localIdentifier= details['name'],
             name= details['name'],
             url= details['name'],
-            description= str(details['design_description']) + str(details['description'])
+            description= str(details['design_description']) if details['design_description'] else ''  + str(details['description']) if details['description'] else ''
         ),
         design= dict( 
             dateStart= details['start_year'],
@@ -474,28 +474,37 @@ def process(exptID):
 
 if __name__ == '__main__':
     
-    exptID = 0
+    while True:
+        exptID = 0
     
-    GLTENIDs = getGLTENIDs()
-    IDs = []
+        GLTENIDs = getGLTENIDs()
+        IDs = []
           
-    for items in GLTENIDs:
-        print (" %s (%s) GLTENID =  %s" % (items['experiment_name'],items['folder'], items['GLTENID']))
-        IDs.append(items['GLTENID'])
+        for items in GLTENIDs:
+            print (" %s (%s) GLTENID =  %s" % (items['experiment_name'],items['folder'], items['GLTENID']))
+            IDs.append(items['GLTENID'])
         
-    print(IDs)
-    print('\n')
+        print(IDs)
+        print('\n')
     
     
-    while exptID == 0:
-        val = input('Which experiment GLTENID? ')
-        try: 
-            exptID = int(val)
-            if exptID  not in IDs:
-                print("not in the list")
-                exptID = 0
-        except ValueError:
-            print("No.. input string is not an Integer. It's a string")
+        while exptID == 0:
+            val = input('Which experiment GLTENID? ')
+            try: 
+                exptID = int(val)
+                if exptID  not in IDs:
+                    print("not in the list")
+                    exptID = 0
+            except ValueError:
+                print("No.. input string is not an Integer. It's a string")
       
-    process(exptID)
+        process(exptID)
+        new_game = input("Would you like to do another one? Enter 'y' or 'n' ")
+        if new_game[0].lower()=='y':
+            playing=True
+            continue
+        else:
+            print("Thanks for your work!")
+            break
+        
     

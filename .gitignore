@@ -2,3 +2,4 @@
 .pydevproject
 src/__pycache__/settings.cpython-37.pyc
 src/config.ini
+src/__pycache__/rest.cpython-37.pyc
