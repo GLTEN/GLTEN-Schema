@@ -295,20 +295,31 @@ def prepareFactors(factordata):
 def prepareFCFactors (FCFactorData, factordata):
     FCFactors = []
     for FCFDetails in FCFactorData:
-        for item in factordata:            
-            if item['id']==FCFDetails['factor_id']:
-                factorName = item['factor_term']
-                for levelitems in item['levels']:                    
-                    if levelitems['id'] == FCFDetails['factor_level_id']:
-                        levelNameText = levelitems['factor_variant_term']  
-                        levelNameCode =  levelitems['factor_variant_label']             
+        factorName = ''
+        levelNameCode = ''
+        levelNameText = ''
+        for item in factordata:                                  
+            factorID = FCFDetails['factor_id']
+            if factorID  > 0:          
+                if item['id']==FCFDetails['factor_id']:
+                    factorName = item['factor_term'] if item['factor_term'] else 'NONE' 
+                    try:
+                        if FCFDetails['factor_level_id']:
+                            factorLevel = int(FCFDetails['factor_level_id'])
+                            for levelitems in item['levels']:                                          
+                                if levelitems['id'] == factorLevel:
+                                    levelNameText = levelitems['factor_variant_term'] if  levelitems['factor_variant_term'] else 'NULL'
+                                    levelNameCode =  levelitems['factor_variant_label'] if levelitems['factor_variant_label'] else 'NULL'
+                    except ValueError:
+                            
+                        print("No Factor Level")
                 
         FCFactors.append(dict(
-            Factor= factorName,
-            levelCode= levelNameCode,
-            levelText = levelNameText,
-            Comment= FCFDetails['comment']
-            ))
+        Factor= factorName,
+        levelCode= levelNameCode,
+        levelText = levelNameText,
+        Comment= FCFDetails['comment']
+        ))
     return FCFactors
     
 def prepareFactorCombinations(factorcombinationData, factordata):
@@ -382,7 +393,7 @@ def prepareDesigns(data):
         preparedcrops = prepareCrops(details['crops']) if details['crops'] else "NA"
         preparedcropRotations = prepareCropRotations(details['rotations']) if details['rotations'] else "NA"
         preparedfactor = prepareFactors(details['factors']) if details['factors'] else "NA"
-        preparedfactorCombinations = prepareFactorCombinations(details['factor_combinations'],details['factors']) if details['factor_combinations'] else "NA"
+        preparedfactorCombinations = prepareFactorCombinations(details['factor_combinations'], details['factors']) if details['factor_combinations'] else "NA"
         preparedmeasurements = prepareMeasurements(details['measurements']) if details['measurements'] else "NA"
         
         designs.append(dict ( 
@@ -496,7 +507,7 @@ if __name__ == '__main__':
                     print("not in the list")
                     exptID = 0
             except ValueError:
-                print("No.. input string is not an Integer. It's a string")
+                print("No.. this is not a number: please choose a number from the list ")
       
         process(exptID)
         new_game = input("Would you like to do another one? Enter 'y' or 'n' ")
