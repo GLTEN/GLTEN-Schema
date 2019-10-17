@@ -440,6 +440,39 @@ def prepareDesigns(data):
         item += 1
     return designs
 
+def prepareContactPoints(contactsData):
+    contacts = []
+    for details in contactsData:
+        contacts.append(dict(
+            contactType= details['contact_type'],
+            description= details['value'])
+            )
+    
+    return contacts
+
+def prepareOrganization(data):
+    orgs = []
+    
+    for details in data['organizations']:
+        preparedRole = "NA"
+        if details['role_term']:
+            preparedRole = details['role_term']
+        elif details['role_label']:
+            preparedRole = details['role_term']
+            
+        orgs.append(dict(
+                type= "Organization",
+                name= details['name'] if details['name'] else "NA" ,
+                legalName= details['abbreviation'] if details['abbreviation'] else details['name'],    
+                identifier= details['name_uri'] if details['name_uri'] else "NA" ,
+                role= preparedRole,
+                contactPoint= prepareContactPoints(details['contacts']) if details['contacts'] else 'NA'#,
+                #startDate= details['contact_type'],
+                #endDate= details['contact_type']
+            ))
+    
+    return orgs
+
 def process(exptID):
     data = getData(exptID)
     
@@ -482,7 +515,15 @@ def process(exptID):
     fxname.close()
     print("design.json saved in  = " + xname) 
 
-
+    orgs = prepareOrganization(data)
+    orgsJson = json.dumps(orgs, indent=4)
+    xname = settings.STAGE+ "metadata/"+str(folder)+"/orgs.json"
+    fxname = open(xname,'w+')
+    fxname.write(orgsJson)
+    fxname.close()
+    print("orgs.json saved in  = " + xname) 
+    
+    
 if __name__ == '__main__':
     
     while True:

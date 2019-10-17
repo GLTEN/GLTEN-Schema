@@ -6,7 +6,7 @@ Created on 9 oct 2019
 
 """
 ROOT = "http://local-info.rothamsted.ac.uk/eRA/era2018-new/"
-STAGE = "d:/eRAstage2/"
+STAGE = "d:/eRAstage3/"
 DEFAULT = "metadata/default/"
 
 experiments = dict(

@@ -56,6 +56,14 @@ def process(exptID):
     fxname.write(designsJson)
     fxname.close()
     print("design.json saved in  = " + xname) 
+    
+    orgs = rest.prepareOrganization(data)
+    orgsJson = json.dumps(orgs, indent=4)
+    xname = settings.STAGE+ "metadata/"+str(folder)+"/orgs.json"
+    fxname = open(xname,'w+')
+    fxname.write(orgsJson)
+    fxname.close()
+    print("orgs.json saved in  = " + xname) 
  
 if __name__ == '__main__':
     

@@ -1,4 +1,16 @@
 {
-	
-
+	"type": "Organization",
+	"name": "Name of the organisation - may be acronym?",
+	"legalName": "The official name of the organization, e.g. the registered company name",
+	"address": "text in that case because that is what we get from GLTEN",
+	"sameAs": "URL of the organization (from name_URI)",
+	"identifier": "name_uri",
+	"logo": "URL for the Logo",
+	"role": "role of the organisation",
+	"contactPoint": {
+		"contactType": "website or email or telephone or fax or postal address",
+		"description": "the value for what is above"
+	},
+	"startDate": "2000",
+	"endDate": "2010"
 }
