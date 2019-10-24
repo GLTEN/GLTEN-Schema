@@ -11,7 +11,7 @@ import requests
 import settings
 import configparser
 import json
-from pygments.lexers import sql
+#from pygments.lexers import sql
 import rest
 
 

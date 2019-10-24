@@ -190,9 +190,8 @@ def prepareSite(data):
         name=  data['site_name'],
         identifier=  data['site_local_code'],
         type = data['site_type_label'],
-        sameAs=  data['data_statement_label'],
         doi=  data['site_doi'],
-        visitsAllowed=  data['site_visits_allowed'],
+        visitsAllowed=  'Yes' if data['site_visits_allowed'] else 'No',
         visitingArrangements= data['site_visiting_arrangements'],
         description= data['site_history'],
         management= data['site_management']
@@ -252,8 +251,8 @@ def preparePersons(data):
 #             ),
             affiliation= dict (
                 type= "Organization",
-                name= "Computational and Analytical Sciences, Rothamsted Research",
-                address= ", West Common, Harpenden, Hertfordshire, AL5 2JQ, United Kingdom"
+                name= "Rothamsted Research",
+                address= "West Common, Harpenden, Hertfordshire, AL5 2JQ, United Kingdom"
             )
             )
                             )
@@ -410,7 +409,7 @@ def prepareDesigns(data):
             dateEnd= details['end_year'],
             description= details['description'],
             studyDesign= details['name'],
-            factorNumber= details['name'],
+            factorCombinationNumber= details['number_of_factor_combinations'] if details['number_of_factor_combinations'] else 'NA',
             numberOdBlocks = details['number_of_blocks'],
             numberOfPlots= details['number_of_plots'],
             numberOfReplicates= details['number_of_replicates'],
