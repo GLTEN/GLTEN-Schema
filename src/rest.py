@@ -47,7 +47,7 @@ def getGLTENIDs():
     """
     cur = getCursor()
     GLTENIDs = []
-    sql = 'SELECT  experiment_name, experiment_code,  GLTENID FROM experiment where GLTENID is not null;'
+    sql = 'SELECT  experiment_name, experiment_code,  GLTENID FROM experiment where GLTENID is not null order by experiment_name;'
     cur.execute(sql)
     results = cur.fetchall()    
     for row in results: 
@@ -63,14 +63,19 @@ def getGLTENIDs():
 def getData(exptID):
     base = "https://glten.org/api/v0/public/experiment/"
     exptID = str(exptID)
+    
+    
     gltenData = requests.get(base + exptID)
     
     if gltenData.status_code != 200:
         # This means something went wrong.
-        raise APIError('GET /tasks/ {}'.format(gltenData.status_code))
+        #raise APIError('GET /tasks/ {}'.format(gltenData.status_code))
+        data = ' - '
     #for todo_item in resp.json():
         #print('{} {}'.format(todo_item['id'], todo_item['summary']))
-    data =  gltenData.json()
+    else :
+        data =  gltenData.json()
+        
     return data
 
 def prepareRelatedExperiments(REdata):
@@ -475,53 +480,55 @@ def prepareOrganization(data):
 def process(exptID):
     data = getData(exptID)
     
-    for items in GLTENIDs:
-        if items['GLTENID']== exptID:
-            folder = items['folder']
-  
-    print(folder)
-    
-    experiment = prepareExperiment(data) 
-    experimentJson =  json.dumps(experiment, indent=4)
-    xname = settings.STAGE+ "metadata/"+str(folder)+"/experiment.json"
-    fxname = open(xname,'w+')
-    fxname.write(experimentJson)
-    fxname.close()
-    print("experiment.json saved in  = " + xname)
+    if data != ' - ':
+        for items in GLTENIDs:
+            if items['GLTENID']== exptID:
+                folder = items['folder']
       
-    site = prepareSite(data)
-    siteJson =  json.dumps(site, indent=4)
-    xname = settings.STAGE+ "metadata/"+str(folder)+"/site.json"
-    fxname = open(xname,'w+')
-    fxname.write(siteJson)
-    fxname.close()
-    print("site.json saved in  = " + xname)
+        print(folder)
+        
+        experiment = prepareExperiment(data) 
+        experimentJson =  json.dumps(experiment, indent=4)
+        xname = settings.STAGE+ "metadata/"+str(folder)+"/experiment.json"
+        fxname = open(xname,'w+')
+        fxname.write(experimentJson)
+        fxname.close()
+        print("experiment.json saved in  = " + xname)
+          
+        site = prepareSite(data)
+        siteJson =  json.dumps(site, indent=4)
+        xname = settings.STAGE+ "metadata/"+str(folder)+"/site.json"
+        fxname = open(xname,'w+')
+        fxname.write(siteJson)
+        fxname.close()
+        print("site.json saved in  = " + xname)
+        
+           
+        persons = dict (contributors = preparePersons(data))
+        personJson =  json.dumps(persons, indent=4)
+        xname = settings.STAGE+ "metadata/"+str(folder)+"/person.json"
+        fxname = open(xname,'w+')
+        fxname.write(personJson)
+        fxname.close()
+        print("person.json saved in  = " + xname) 
+        
+        design = prepareDesigns(data)
+        designsJson = json.dumps(design, indent=4)
+        xname = settings.STAGE+ "metadata/"+str(folder)+"/design.json"
+        fxname = open(xname,'w+')
+        fxname.write(designsJson)
+        fxname.close()
+        print("design.json saved in  = " + xname) 
     
-       
-    persons = dict (contributors = preparePersons(data))
-    personJson =  json.dumps(persons, indent=4)
-    xname = settings.STAGE+ "metadata/"+str(folder)+"/person.json"
-    fxname = open(xname,'w+')
-    fxname.write(personJson)
-    fxname.close()
-    print("person.json saved in  = " + xname) 
-    
-    design = prepareDesigns(data)
-    designsJson = json.dumps(design, indent=4)
-    xname = settings.STAGE+ "metadata/"+str(folder)+"/design.json"
-    fxname = open(xname,'w+')
-    fxname.write(designsJson)
-    fxname.close()
-    print("design.json saved in  = " + xname) 
-
-    orgs = prepareOrganization(data)
-    orgsJson = json.dumps(orgs, indent=4)
-    xname = settings.STAGE+ "metadata/"+str(folder)+"/orgs.json"
-    fxname = open(xname,'w+')
-    fxname.write(orgsJson)
-    fxname.close()
-    print("orgs.json saved in  = " + xname) 
-    
+        orgs = prepareOrganization(data)
+        orgsJson = json.dumps(orgs, indent=4)
+        xname = settings.STAGE+ "metadata/"+str(folder)+"/orgs.json"
+        fxname = open(xname,'w+')
+        fxname.write(orgsJson)
+        fxname.close()
+        print("orgs.json saved in  = " + xname) 
+    else: 
+        print('DATA NOT READY')
     
 if __name__ == '__main__':
     
